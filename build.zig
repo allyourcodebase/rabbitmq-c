@@ -30,7 +30,7 @@ pub fn build(b: *std.Build) void {
     });
     if (!shared) {
         lib.pie = true;
-        lib.defineCMacro("AMQP_STATIC", "");
+        lib.root_module.addCMacro("AMQP_STATIC", "");
     }
     const configH = b.addConfigHeader(.{
         .style = .blank,
@@ -46,7 +46,7 @@ pub fn build(b: *std.Build) void {
         },
         .ENABLE_SSL_ENGINE_API = if (ssl) {} else null,
     });
-    lib.defineCMacro("HAVE_CONFIG_H", null);
+    lib.root_module.addCMacro("HAVE_CONFIG_H", "");
     lib.addConfigHeader(configH);
     lib.addIncludePath(generated_export_header.getDirectory());
     lib.addIncludePath(b.path("include"));
