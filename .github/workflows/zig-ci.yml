@@ -11,9 +11,7 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v4
-      - uses: mlugg/setup-zig@v1
-        with:
-          version: master
+      - uses: mlugg/setup-zig@v2
       - name: (Zig) Build
         run: zig build --summary all -Dexamples -freference-trace
 
@@ -31,8 +29,6 @@ jobs:
           - x86-linux-musl
     steps:
       - uses: actions/checkout@v4
-      - uses: mlugg/setup-zig@v1
-        with:
-          version: master
+      - uses: mlugg/setup-zig@v2
       - name: Build Summary ${{ matrix.targets }}
         run: zig build --summary all -Dexamples -freference-trace -Dtarget=${{ matrix.targets }}
